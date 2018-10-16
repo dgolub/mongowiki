@@ -27,6 +27,7 @@ namespace MongoWiki
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseStaticFiles();
             app.UseMvc();
         }
     }

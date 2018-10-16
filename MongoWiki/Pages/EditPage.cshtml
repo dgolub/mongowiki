@@ -9,6 +9,8 @@
 <h2>@Model.WikiPage.Name</h2>
 
 <form method="post">
-    <textarea asp-for="NewContent"></textarea>
-    <button type="submit">Save</button>
+    <div class="form-group">
+        <textarea asp-for="NewContent" rows="15" class="form-control"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
 </form>
