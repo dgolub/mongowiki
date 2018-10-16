@@ -1,10 +1,11 @@
 ﻿@page "/pages/{slug}"
 
 @model MongoWiki.Pages.ViewPageModel
+@using Markdig
 @{
     ViewData["Title"] = "ViewPage";
 }
 
 <h2>@Model.WikiPage.Name</h2>
 
-<p>@Model.MostRecentRevision.Content</p>
+@Html.Raw(Markdown.ToHtml(Model.MostRecentRevision.Content))
