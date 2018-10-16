@@ -40,7 +40,7 @@ namespace MongoWiki.Pages
             {
                 PageId = WikiPage.Id,
                 Created = DateTime.Now,
-                Content = NewContent
+                Content = NewContent.Replace("\r\n", "\n")
             });
             return RedirectToPage("ViewPage", new { slug = slug });
         }
