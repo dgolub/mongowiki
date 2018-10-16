@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using MongoWiki.Services;
 
 namespace MongoWiki
 {
@@ -14,6 +15,8 @@ namespace MongoWiki
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddSingleton<MongoClientService>();
+            services.AddSingleton<WikiPageService>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

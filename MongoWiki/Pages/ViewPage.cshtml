@@ -1,0 +1,8 @@
+﻿@page "/pages/{slug}"
+
+@model MongoWiki.Pages.ViewPageModel
+@{
+    ViewData["Title"] = "ViewPage";
+}
+
+<h2>@Model.WikiPage.Name</h2>
