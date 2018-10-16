@@ -17,6 +17,7 @@ namespace MongoWiki
             services.AddMvc();
             services.AddSingleton<MongoClientService>();
             services.AddSingleton<WikiPageService>();
+            services.AddSingleton<WikiPageRevisionService>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

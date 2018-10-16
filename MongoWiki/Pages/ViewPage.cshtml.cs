@@ -12,17 +12,21 @@ namespace MongoWiki.Pages
     public class ViewPageModel : PageModel
     {
         private WikiPageService _wikiPageService;
+        private WikiPageRevisionService _revisionService;
 
         public WikiPage WikiPage { get; set; }
+        public WikiPageRevision MostRecentRevision { get; set; }
 
-        public ViewPageModel(WikiPageService wikiPageService)
+        public ViewPageModel(WikiPageService wikiPageService, WikiPageRevisionService revisionService)
         {
             _wikiPageService = wikiPageService;
+            _revisionService = revisionService;
         }
 
         public void OnGet(string slug)
         {
             WikiPage = _wikiPageService.FindBySlug(slug);
+            MostRecentRevision = _revisionService.FindMostRecentByPageId(WikiPage.Id);
         }
     }
 }
