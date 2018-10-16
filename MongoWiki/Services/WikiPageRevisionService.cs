@@ -20,6 +20,11 @@ namespace MongoWiki.Services
                     .GetCollection<WikiPageRevision>("revisions");
         }
 
+        public void AddRevision(WikiPageRevision revision)
+        {
+            _collection.InsertOne(revision);
+        }
+
         public WikiPageRevision FindMostRecentByPageId(ObjectId pageId)
         {
             return _collection.AsQueryable()

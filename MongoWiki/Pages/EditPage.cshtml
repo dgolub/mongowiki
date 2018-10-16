@@ -1,0 +1,14 @@
+﻿@page "/pages/{slug}/edit"
+
+@model MongoWiki.Pages.EditPageModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = $"{Model.WikiPage.Name} - Edit";
+}
+
+<h2>@Model.WikiPage.Name</h2>
+
+<form method="post">
+    <textarea asp-for="NewContent"></textarea>
+    <button type="submit">Save</button>
+</form>
