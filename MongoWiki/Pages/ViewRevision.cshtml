@@ -1,10 +1,16 @@
 ﻿@page "/pages/{slug}/history/{revisionNumber:int}"
 @model MongoWiki.Pages.ViewRevisionModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @using Markdig
 @{
     ViewData["Title"] = $"{Model.WikiPage.Name} - Revision {Model.Revision.RevisionNumber}";
 }
 
 <h2>@Model.WikiPage.Name</h2>
+
+<div class="alert alert-info" role="alert">
+    <p>You are currently viewing an old revision of this page.</p>
+    <a asp-page="ViewPage" asp-route-slug="@Model.WikiPage.Slug" role="button" class="btn btn-outline-dark">View Current Revision</a>
+</div>
 
 @Html.Raw(Markdown.ToHtml(Model.Revision.Content))
