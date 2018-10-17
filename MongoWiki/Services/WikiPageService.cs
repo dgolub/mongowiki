@@ -23,7 +23,7 @@ namespace MongoWiki.Services
         {
             return _collection.AsQueryable()
                 .Where(model => model.Slug == slug)
-                .Single();
+                .SingleOrDefault();
         }
     }
 }

@@ -23,10 +23,19 @@ namespace MongoWiki.Pages
             _revisionService = revisionService;
         }
 
-        public void OnGet(string slug)
+        public IActionResult OnGet(string slug)
         {
             WikiPage = _wikiPageService.FindBySlug(slug);
+            if (WikiPage == null)
+            {
+                return NotFound();
+            }
             MostRecentRevision = _revisionService.FindMostRecentByPageId(WikiPage.Id);
+            if (MostRecentRevision == null)
+            {
+                return NotFound();
+            }
+            return Page();
         }
     }
 }

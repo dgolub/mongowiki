@@ -30,7 +30,7 @@ namespace MongoWiki.Services
             return _collection.AsQueryable()
                 .Where(model => model.PageId == pageId)
                 .OrderByDescending(model => model.Created)
-                .First();
+                .FirstOrDefault();
         }
     }
 }
