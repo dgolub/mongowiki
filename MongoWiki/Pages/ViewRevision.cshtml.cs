@@ -23,14 +23,14 @@ namespace MongoWiki.Pages
             _revisionService = revisionService;
         }
 
-        public IActionResult OnGet(string slug, int revisionNumber)
+        public async Task<IActionResult> OnGetAsync(string slug, int revisionNumber)
         {
-            WikiPage = _wikiPageService.FindBySlug(slug);
+            WikiPage = await _wikiPageService.FindBySlug(slug);
             if (WikiPage == null)
             {
                 return NotFound();
             }
-            Revision = _revisionService.FindByRevisionNumber(WikiPage.Id, revisionNumber);
+            Revision = await _revisionService.FindByRevisionNumber(WikiPage.Id, revisionNumber);
             if (Revision == null)
             {
                 return NotFound();

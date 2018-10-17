@@ -29,14 +29,14 @@ namespace MongoWiki.Pages
             _revisionService = revisionService;
         }
 
-        public IActionResult OnGet(string slug)
+        public async Task<IActionResult> OnGetAsync(string slug)
         {
-            WikiPage = _wikiPageService.FindBySlug(slug);
+            WikiPage = await _wikiPageService.FindBySlug(slug);
             if (WikiPage == null)
             {
                 return NotFound();
             }
-            MostRecentRevision = _revisionService.FindMostRecentByPageId(WikiPage.Id);
+            MostRecentRevision = await _revisionService.FindMostRecentByPageId(WikiPage.Id);
             NewContent = MostRecentRevision?.Content;
             if (MostRecentRevision == null)
             {
@@ -45,15 +45,15 @@ namespace MongoWiki.Pages
             return Page();
         }
 
-        public IActionResult OnPost(string slug)
+        public async Task<IActionResult> OnPost(string slug)
         {
-            WikiPage = _wikiPageService.FindBySlug(slug);
+            WikiPage = await _wikiPageService.FindBySlug(slug);
             if (WikiPage == null)
             {
                 return NotFound();
             }
-            MostRecentRevision = _revisionService.FindMostRecentByPageId(WikiPage.Id);
-            _revisionService.AddRevision(new WikiPageRevision()
+            MostRecentRevision = await _revisionService.FindMostRecentByPageId(WikiPage.Id);
+            await _revisionService.AddRevision(new WikiPageRevision()
             {
                 PageId = WikiPage.Id,
                 RevisionNumber = (MostRecentRevision?.RevisionNumber ?? 0) + 1,

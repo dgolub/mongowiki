@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using MongoWiki.Models;
 using MongoWiki.Services;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace MongoWiki.Pages
 {
@@ -17,9 +18,9 @@ namespace MongoWiki.Pages
             _wikiPageService = wikiPageService;
         }
 
-        public void OnGet()
+        public async Task OnGetAsync()
         {
-            WikiPages = _wikiPageService.FindAll();
+            WikiPages = await _wikiPageService.FindAll();
         }
     }
 }

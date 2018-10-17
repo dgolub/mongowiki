@@ -23,10 +23,10 @@ namespace MongoWiki.Services
                     new CreateIndexOptions() { Unique = true }));
         }
 
-        public string AddPage(string name)
+        public async Task<string> AddPage(string name)
         {
             string slug = name.ToLower().Replace(' ', '-');
-            _collection.InsertOne(new WikiPage()
+            await _collection.InsertOneAsync(new WikiPage()
             {
                 Name = name,
                 Slug = slug
@@ -34,15 +34,16 @@ namespace MongoWiki.Services
             return slug;
         }
 
-        public List<WikiPage> FindAll()
+        public async Task<List<WikiPage>> FindAll()
         {
-            return _collection.AsQueryable().ToList();
+            return await _collection.AsQueryable().ToListAsync();
         }
 
-        public WikiPage FindBySlug(string slug)
+        public async Task<WikiPage> FindBySlug(string slug)
         {
-            return _collection.AsQueryable()
+            return await _collection.AsQueryable()
                 .Where(model => model.Slug == slug)
+                .ToAsyncEnumerable()
                 .SingleOrDefault();
         }
     }

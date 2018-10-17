@@ -29,31 +29,34 @@ namespace MongoWiki.Services
                     }));
         }
 
-        public void AddRevision(WikiPageRevision revision)
+        public async Task AddRevision(WikiPageRevision revision)
         {
-            _collection.InsertOne(revision);
+            await _collection.InsertOneAsync(revision);
         }
 
-        public List<WikiPageRevision> FindAllByPageId(ObjectId pageId)
+        public async Task<List<WikiPageRevision>> FindAllByPageId(ObjectId pageId)
         {
-            return _collection.AsQueryable()
+            return await _collection.AsQueryable()
                 .Where(model => model.PageId == pageId)
                 .OrderByDescending(model => model.RevisionNumber)
+                .ToAsyncEnumerable()
                 .ToList();
         }
 
-        public WikiPageRevision FindMostRecentByPageId(ObjectId pageId)
+        public async Task<WikiPageRevision> FindMostRecentByPageId(ObjectId pageId)
         {
-            return _collection.AsQueryable()
+            return await _collection.AsQueryable()
                 .Where(model => model.PageId == pageId)
                 .OrderByDescending(model => model.RevisionNumber)
+                .ToAsyncEnumerable()
                 .FirstOrDefault();
         }
 
-        public WikiPageRevision FindByRevisionNumber(ObjectId pageId, int revisionNumber)
+        public async Task<WikiPageRevision> FindByRevisionNumber(ObjectId pageId, int revisionNumber)
         {
-            return _collection.AsQueryable()
+            return await _collection.AsQueryable()
                 .Where(model => model.PageId == pageId && model.RevisionNumber == revisionNumber)
+                .ToAsyncEnumerable()
                 .SingleOrDefault();
         }
     }

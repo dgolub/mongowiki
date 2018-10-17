@@ -20,9 +20,9 @@ namespace MongoWiki.Pages
             _wikiPageService = wikiPageService;
         }
 
-        public IActionResult OnPost()
+        public async Task<IActionResult> OnPostAsync()
         {
-            string slug = _wikiPageService.AddPage(Name);
+            string slug = await _wikiPageService.AddPage(Name);
             return RedirectToPage("EditPage", new { slug });
         }
     }
