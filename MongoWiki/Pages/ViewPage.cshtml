@@ -1,11 +1,21 @@
 ﻿@page "/pages/{slug}"
-
 @model MongoWiki.Pages.ViewPageModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @using Markdig
 @{
     ViewData["Title"] = "ViewPage";
 }
 
-<h2>@Model.WikiPage.Name</h2>
+<div class="row">
+    <div class="col">
+        <h2>@Model.WikiPage.Name</h2>
+    </div>
+    <div class="col-auto">
+        <div class="btn-group">
+            <a asp-page="EditPage" asp-route-slug="@Model.WikiPage.Slug" role="button" class="btn btn-outline-dark">Edit</a>
+            <a asp-page="PageHistory" asp-route-slug="@Model.WikiPage.Slug" role="button" class="btn btn-outline-dark">History</a>
+        </div>
+    </div>
+</div>
 
 @Html.Raw(Markdown.ToHtml(Model.MostRecentRevision.Content))
