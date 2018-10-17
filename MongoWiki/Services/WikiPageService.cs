@@ -17,6 +17,10 @@ namespace MongoWiki.Services
                 mongoClientService.MongoClient
                     .GetDatabase("wiki")
                     .GetCollection<WikiPage>("pages");
+            _collection.Indexes.CreateOne(
+                new CreateIndexModel<WikiPage>(
+                    Builders<WikiPage>.IndexKeys.Ascending(model => model.Slug),
+                    new CreateIndexOptions() { Unique = true }));
         }
 
         public WikiPage FindBySlug(string slug)

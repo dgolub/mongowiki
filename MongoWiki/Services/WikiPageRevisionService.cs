@@ -18,6 +18,15 @@ namespace MongoWiki.Services
                 mongoClientService.MongoClient
                     .GetDatabase("wiki")
                     .GetCollection<WikiPageRevision>("revisions");
+            _collection.Indexes.CreateOne(
+                new CreateIndexModel<WikiPageRevision>(
+                    Builders<WikiPageRevision>.IndexKeys
+                        .Ascending(model => model.PageId)
+                        .Ascending(model => model.RevisionNumber),
+                    new CreateIndexOptions()
+                    {
+                        Unique = true
+                    }));
         }
 
         public void AddRevision(WikiPageRevision revision)
