@@ -20,6 +20,9 @@ namespace MongoWiki.Pages
         [BindProperty]
         public string NewContent { get; set; }
 
+        [BindProperty]
+        public string NewComment { get; set; }
+
         public EditPageModel(WikiPageService wikiPageService, WikiPageRevisionService revisionService)
         {
             _wikiPageService = wikiPageService;
@@ -55,7 +58,8 @@ namespace MongoWiki.Pages
                 PageId = WikiPage.Id,
                 RevisionNumber = (MostRecentRevision?.RevisionNumber ?? 0) + 1,
                 Created = DateTime.Now,
-                Content = NewContent.Replace("\r\n", "\n")
+                Content = NewContent.Replace("\r\n", "\n"),
+                Comment = NewComment
             });
             return RedirectToPage("ViewPage", new { slug = slug });
         }

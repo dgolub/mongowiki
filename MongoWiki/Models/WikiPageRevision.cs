@@ -22,5 +22,8 @@ namespace MongoWiki.Models
 
         [BsonElement("content")]
         public string Content { get; set; }
+
+        [BsonElement("comment")]
+        public string Comment { get; set; }
     }
 }
