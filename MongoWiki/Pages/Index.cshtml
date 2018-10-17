@@ -1,6 +1,18 @@
 ﻿@page
+@model MongoWiki.Pages.IndexModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using MongoWiki.Models
 @{
     ViewData["Title"] = "Index";
 }
 
 <h2>Index</h2>
+
+<ul>
+    @foreach (WikiPage wikiPage in Model.WikiPages)
+    {
+        <li>
+            <a asp-page="ViewPage" asp-route-slug="@wikiPage.Slug">@wikiPage.Name</a>
+        </li>
+    }
+</ul>

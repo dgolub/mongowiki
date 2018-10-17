@@ -23,6 +23,11 @@ namespace MongoWiki.Services
                     new CreateIndexOptions() { Unique = true }));
         }
 
+        public List<WikiPage> FindAll()
+        {
+            return _collection.AsQueryable().ToList();
+        }
+
         public WikiPage FindBySlug(string slug)
         {
             return _collection.AsQueryable()
