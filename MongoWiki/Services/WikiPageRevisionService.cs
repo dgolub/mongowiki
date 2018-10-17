@@ -34,6 +34,14 @@ namespace MongoWiki.Services
             _collection.InsertOne(revision);
         }
 
+        public List<WikiPageRevision> FindAllByPageId(ObjectId pageId)
+        {
+            return _collection.AsQueryable()
+                .Where(model => model.PageId == pageId)
+                .OrderByDescending(model => model.RevisionNumber)
+                .ToList();
+        }
+
         public WikiPageRevision FindMostRecentByPageId(ObjectId pageId)
         {
             return _collection.AsQueryable()

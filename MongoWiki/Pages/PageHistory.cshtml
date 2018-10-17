@@ -1,0 +1,26 @@
+﻿@page "/pages/{slug}/history"
+@model MongoWiki.Pages.PageHistoryModel
+@using MongoWiki.Models
+@{
+    ViewData["Title"] = $"{Model.WikiPage.Name} - History";
+}
+
+<h2>@Model.WikiPage.Name</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (WikiPageRevision revision in Model.Revisions)
+        {
+            <tr>
+                <th scope="row">@revision.RevisionNumber</th>
+                <td>@revision.Created.ToShortDateString()</td>
+            </tr>
+        }
+    </tbody>
+</table>
