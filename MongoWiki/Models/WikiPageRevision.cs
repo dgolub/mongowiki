@@ -14,6 +14,9 @@ namespace MongoWiki.Models
         [BsonElement("pageId")]
         public ObjectId PageId { get; set; }
 
+        [BsonElement("revisionNumber")]
+        public int RevisionNumber { get; set; }
+
         [BsonElement("created")]
         public DateTime Created { get; set; }
 

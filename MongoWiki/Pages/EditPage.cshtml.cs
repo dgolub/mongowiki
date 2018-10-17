@@ -45,9 +45,15 @@ namespace MongoWiki.Pages
         public IActionResult OnPost(string slug)
         {
             WikiPage = _wikiPageService.FindBySlug(slug);
+            if (WikiPage == null)
+            {
+                return NotFound();
+            }
+            MostRecentRevision = _revisionService.FindMostRecentByPageId(WikiPage.Id);
             _revisionService.AddRevision(new WikiPageRevision()
             {
                 PageId = WikiPage.Id,
+                RevisionNumber = (MostRecentRevision?.RevisionNumber ?? 0) + 1,
                 Created = DateTime.Now,
                 Content = NewContent.Replace("\r\n", "\n")
             });
