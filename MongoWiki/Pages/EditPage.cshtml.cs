@@ -37,11 +37,11 @@ namespace MongoWiki.Pages
                 return NotFound();
             }
             MostRecentRevision = _revisionService.FindMostRecentByPageId(WikiPage.Id);
+            NewContent = MostRecentRevision?.Content;
             if (MostRecentRevision == null)
             {
-                return NotFound();
+                NewComment = "Initial revision";
             }
-            NewContent = MostRecentRevision.Content;
             return Page();
         }
 

@@ -6,7 +6,14 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>Index</h2>
+<div class="row">
+    <div class="col">
+        <h2>Index</h2>
+    </div>
+    <div class="col-auto">
+        <a asp-page="CreatePage" role="button" class="btn btn-outline-dark">Create Page</a>
+    </div>
+</div>
 
 <ul>
     @foreach (WikiPage wikiPage in Model.WikiPages)

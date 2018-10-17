@@ -23,6 +23,17 @@ namespace MongoWiki.Services
                     new CreateIndexOptions() { Unique = true }));
         }
 
+        public string AddPage(string name)
+        {
+            string slug = name.ToLower().Replace(' ', '-');
+            _collection.InsertOne(new WikiPage()
+            {
+                Name = name,
+                Slug = slug
+            });
+            return slug;
+        }
+
         public List<WikiPage> FindAll()
         {
             return _collection.AsQueryable().ToList();
