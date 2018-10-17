@@ -31,10 +31,6 @@ namespace MongoWiki.Pages
                 return NotFound();
             }
             MostRecentRevision = _revisionService.FindMostRecentByPageId(WikiPage.Id);
-            if (MostRecentRevision == null)
-            {
-                return NotFound();
-            }
             return Page();
         }
     }

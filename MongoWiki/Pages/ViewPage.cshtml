@@ -18,4 +18,11 @@
     </div>
 </div>
 
-@Html.Raw(Markdown.ToHtml(Model.MostRecentRevision.Content))
+@if (Model.MostRecentRevision != null)
+{
+    @Html.Raw(Markdown.ToHtml(Model.MostRecentRevision.Content))
+}
+else
+{
+    <div class="alert alert-info" role="alert">No content has yet been created for this page.</div>
+}
