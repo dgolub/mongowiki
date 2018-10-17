@@ -49,5 +49,12 @@ namespace MongoWiki.Services
                 .OrderByDescending(model => model.RevisionNumber)
                 .FirstOrDefault();
         }
+
+        public WikiPageRevision FindByRevisionNumber(ObjectId pageId, int revisionNumber)
+        {
+            return _collection.AsQueryable()
+                .Where(model => model.PageId == pageId && model.RevisionNumber == revisionNumber)
+                .SingleOrDefault();
+        }
     }
 }

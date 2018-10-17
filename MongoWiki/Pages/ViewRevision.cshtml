@@ -1,0 +1,10 @@
+﻿@page "/pages/{slug}/history/{revisionNumber:int}"
+@model MongoWiki.Pages.ViewRevisionModel
+@using Markdig
+@{
+    ViewData["Title"] = $"{Model.WikiPage.Name} - Revision {Model.Revision.RevisionNumber}";
+}
+
+<h2>@Model.WikiPage.Name</h2>
+
+@Html.Raw(Markdown.ToHtml(Model.Revision.Content))
