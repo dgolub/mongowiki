@@ -45,7 +45,7 @@ namespace MongoWiki.Pages
             return Page();
         }
 
-        public async Task<IActionResult> OnPost(string slug)
+        public async Task<IActionResult> OnPostAsync(string slug)
         {
             WikiPage = await _wikiPageService.FindBySlug(slug);
             if (WikiPage == null)
@@ -61,7 +61,7 @@ namespace MongoWiki.Pages
                 Content = NewContent.Replace("\r\n", "\n"),
                 Comment = NewComment
             });
-            return RedirectToPage("ViewPage", new { slug = slug });
+            return RedirectToPage("ViewPage", new { slug });
         }
     }
 }
